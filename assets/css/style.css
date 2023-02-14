@@ -1,0 +1,118 @@
+
+*{
+    margin: 0; /*sets all margins back to a default of 0 */
+    padding: 0; /*reset all padding to 0*/
+    box-sizing: border-box; /* This sets the padding and border to be included in the width and height*/
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.app
+{
+    background-color: lightblue;
+    display: flex; 
+    min-height: 100vh; /*sets the display to reach all the way to the bottom of the page as vh is percentage of page */
+}
+
+.sidebar{
+    flex: 1 1 0;
+    max-width: 400px;
+    padding: 2rem 1rem;
+    background-color: black;
+}
+
+.sidebar h3{
+    color: grey;
+    font-size: 1rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.sidebar .menu{
+    margin: 0 -1rem;
+}
+
+.sidebar .menu .menu-item{
+    display: block;
+    padding: 1em;
+    color: white;
+    text-decoration: none;
+    transition: .2s linear;
+}
+
+.sidebar .menu .menu-item:hover {
+    color: teal;
+    border-right: 5px solid teal;
+}
+
+.quiz-timer {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 2rem;
+    background-color: white;
+    border-radius: 99px;
+}
+
+.content {
+    width: 60vw;
+    margin-top: 5%;
+    margin-left: 10%;
+    height: 80vh;
+    justify-content: center;
+    align-items: center;
+    background-color: grey;
+    box-shadow: 0 0 10px 2px;
+    border-radius: 10px;
+}
+
+.question {
+    font-size: 50px;
+    text-align: center;
+    margin-top: 30px;
+    padding: 30px;
+    max-width: 100%;
+}
+
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    max-width: 80%;
+    gap: 20px;
+    margin: auto;
+}
+
+.button {
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 10px 5px;
+    height: 175px;
+    font-size: 20px;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.start-button, .next-button, .end-button {
+    font-weight: bold;
+    font-size: 25px;
+    padding: 10px 25px;
+    margin-top: 25px;
+    width: 250px;
+    height: 150px;
+}
+
+.hidden {
+    display: none;
+}
+
+.button.correct {
+    background-color: green;
+}
+
+.button.wrong {
+    background-color: red;
+}
