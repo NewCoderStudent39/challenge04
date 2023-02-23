@@ -72,20 +72,30 @@ const nextButton = document.getElementById('next-button');
 const displayQuestion = document.getElementById('question');
 const possibleAnswers = Array.from(document.getElementsByClassName('answer'));
 const endButton = document.getElementById('end-button');
-const initials = document.querySelector('highscore');
-const initialsInput = document.querySelector('highscore-input');
-const submitHighScore = document.querySelector('submit-button');
+const initials = document.querySelector('.highscore');
+const initialsInput = document.querySelector('.highscore-input');
+const submitHighScore = document.querySelector('.submit-button');
+const initialsButton = document.querySelector('.submit-button');
+const previousHighScores = document.getElementById('dynamic-list');
 
 startButton.addEventListener('click', startGame);
 nextButton.addEventListener('click', setNextQuestion);
-endButton.addEventListener('click', clearBoard)
+endButton.addEventListener('click', clearBoard);
+
+document.getElementById('reset-list').addEventListener('click', function() {
+    document.getElementById('dynamic-list').innerHTML = "High Scores";
+})
 
 var questionIndex = 0;
 
-console.log(possibleAnswers.length)
+function SaveInfo() {
+    let li = document.createElement("li");
+    li.textContent = `${initialsInput.value} score: ${score}`;
+    console.log(li);
+    document.getElementById('dynamic-list').appendChild(li);
+}
 
 function startGame() {
-
     console.log('started');
     quizTimer();
     startButton.classList.add('hidden');
@@ -96,7 +106,6 @@ function startGame() {
 
 function setNextQuestion () {
     resetQuiz();
-    addScore();
     showQuestion(); 
 }
 
@@ -112,7 +121,9 @@ function clearBoard() {
     for (let i = 0; i < possibleAnswers.length; i++) {
         possibleAnswers[i].classList.add('hidden');
     }
-    addHighScore();    
+    console.log('hello');
+    addHighScore();  
+    console.log('goodbye');
 }
 
 function addHighScore() {
@@ -121,10 +132,30 @@ function addHighScore() {
     submitHighScore.classList.remove('hidden');
 }
 
-function addScore() { //adding multiple times error
+function addScore() { 
     score = score + 100;
     console.log('add score ...');
     console.log(score);
+}
+
+for (let i = 0; i < possibleAnswers.length; i++) {
+    possibleAnswers[i].addEventListener('click', function(event) {
+        if (event.target.classList.contains('true'))
+        {
+            event.target.classList.add('correct');
+            nextButton.classList.remove('hidden');
+            console.log(questionIndex);
+            addScore();
+            if (questionIndex == maxQuestions) {
+                endButton.classList.remove('hidden');
+                nextButton.classList.add('hidden');
+            }
+        }
+        else {
+            seconds = seconds -10;
+            event.target.classList.add('wrong');
+        }
+    })
 }
 
 function showQuestion() {
@@ -132,22 +163,23 @@ function showQuestion() {
         for (let i = 0; i < possibleAnswers.length; i++ ) {
         possibleAnswers[i].innerText = questions[questionIndex].answers[i].text;
         possibleAnswers[i].classList.add(questions[questionIndex].answers[i].correct);
-        possibleAnswers[i].addEventListener('click', function(event){
-            if (event.target.classList.contains('true'))
-            {
-                    event.target.classList.add('correct');
-                    nextButton.classList.remove('hidden');
-                    console.log(questionIndex);
-                    if (questionIndex == maxQuestions) {
-                        endButton.classList.remove('hidden');
-                        nextButton.classList.add('hidden');
-                    }
-            }
-            else {
-                seconds = seconds -10;
-                event.target.classList.add('wrong');
-            }
-        });
+        // possibleAnswers[i].addEventListener('click', function(event){
+        //     if (event.target.classList.contains('true'))
+        // {
+        //     event.target.classList.add('correct');
+        //     nextButton.classList.remove('hidden');
+        //     console.log(questionIndex);
+        //     addScore();
+        //     if (questionIndex == maxQuestions) {
+        //         endButton.classList.remove('hidden');
+        //         nextButton.classList.add('hidden');
+        //     }
+        // }
+        // else {
+        //     seconds = seconds -10;
+        //     event.target.classList.add('wrong');
+        // }
+        // });
     }
     questionIndex++;
     console.log(questionIndex);

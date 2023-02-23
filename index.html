@@ -15,7 +15,7 @@
             <nav class="menu">
                 <a href="#" class="menu-item"> Home </a>
                 <ul id="dynamic-list" class = "menu-item"> High Scores </ul>
-                <a href="#" class="menu-item"> Reset ScoreBoard</a>
+                <a href="#" id="reset-list" class="menu-item"> Reset ScoreBoard</a>
             </nav>
         </aside>
 
@@ -36,12 +36,13 @@
                 <button id="start-button" class="start-button button"> Start </button>
                 <button id="next-button" class="next-button button hidden"> Next </button>
                 <button id="end-button" class="end-button button hidden"> End </button>
+                <div class="score-card"> 
+                    <label class="hidden highscore"> Initials: </label>
+                    <input type="text" name="name" class="hidden  highscore-input">
+                    <button class="hidden submit-button" onclick="SaveInfo()"> Submit Score</button>
+                </div>
             </div>
-            <div class="score-card"> 
-                <label class="hidden highscore"> Initials: </label>
-                <input type="text" name="name" class=" hidden highscore-input">
-                <button class="hidden submit-button"> Submit Score</button>
-            </div>
+            
         </div>
     </div>
     <script src="./assets/js/program.js"></script>
